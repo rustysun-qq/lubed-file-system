@@ -1,0 +1,22 @@
+{
+    "name":"lubed/file-system",
+    "type": "project",
+    "license": "proprietary",
+    "prefer-stable": true,
+    "require": {
+        "ext-fileinfo": "*",
+        "ext-spl":"*",
+        "php": ">=8.0",
+        "lubed/utils": "dev-main",
+        "lubed/supports": "dev-main",
+        "lubed/exceptions": "dev-main",
+        "lubed/matcher": "dev-main"
+    },
+    "config": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Lubed\\FileSystem\\": "src/"
+        }
+    }
+}
