@@ -15,7 +15,6 @@ final class FSO {
             return file_get_contents($path);
         }
         FSExceptions::fileNotFound(sprintf("File does not exist at path %s",$path), [
-            'class'=>__CLASS__,
             'method'=>__METHOD__
         ]);
     }
@@ -31,6 +30,7 @@ final class FSO {
     }
 
     public function put($path, $contents, $lock=false) {
+        $this->initDirectory($path);
         return file_put_contents($path, $contents, $lock ? LOCK_EX : 0);
     }
 
@@ -116,6 +116,14 @@ final class FSO {
         return array_filter($glob, function($file) {
             return filetype($file) == 'file';
         });
+    }
+
+    public function initDirectory(string $file){
+        $path = dirname($file);
+        if(!$this->isDirectory($path)){
+            return $this->makeDirectory($path,0755,true);
+        }
+        return true;
     }
 
     public function makeDirectory($path, $mode=0755, $recursive=false, $force=false) {
